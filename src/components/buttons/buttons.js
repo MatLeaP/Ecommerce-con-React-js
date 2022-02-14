@@ -1,6 +1,6 @@
-const Button = ({label, borderRadius = '40%', backgroundColor= 'yellow'}) =>{
+const Button = ({label, borderRadius = '40%', backgroundColor= 'yellow', handleClick}) =>{
     return(
-        <button style ={{borderRadius, backgroundColor}}  >{label}
+        <button style ={{borderRadius, backgroundColor}} onClick={handleClick}  >{label}
         </button>
     )
 }

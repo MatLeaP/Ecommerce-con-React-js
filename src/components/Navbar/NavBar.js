@@ -2,16 +2,30 @@ import CartWidget from '../CartWidget/CartWidget';
 import './NavBar.css';
 import Button from '../buttons/buttons';
 
-const NavBar = () =>{
+const NavBar = ({title}) =>{
+
+    const handleTodos = () => {
+        console.log('todos')
+    }
+    const handleCerveza = () => {
+        console.log('cerveza')
+    }
+    const handleLicores = () => {
+        console.log('licores')
+    }
+    const handleWhiskys = () => {
+        console.log('whiskys')
+    }
+
     return(
         <nav>           
             <p>
-                Mi tienda
+                {title}
             </p>
-            <Button label= "TODOS" />
-            <Button label= "CERVEZAS" />
-            <Button label= "LICORES" />
-            <Button label= "WHISKYS" />
+            <Button label= "TODOS" handleClick={handleTodos}/>
+            <Button label= "CERVEZAS" handleClick={handleCerveza} />
+            <Button label= "LICORES" handleClick={handleLicores}/>
+            <Button label= "WHISKYS" handleClick={handleWhiskys}/>
             <div>
                 <CartWidget />
             </div>
