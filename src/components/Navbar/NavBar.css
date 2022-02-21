@@ -5,3 +5,7 @@ nav{
     justify-content: space-around;
     align-items: center;
 }
+.iconNav{
+    width: 30px;
+    height: 30px;
+}

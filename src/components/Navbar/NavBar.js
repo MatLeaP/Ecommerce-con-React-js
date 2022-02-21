@@ -21,6 +21,7 @@ const NavBar = ({title}) =>{
         <nav>           
             <p>
                 {title}
+                <img src="./images/barril.png" className='iconNav'></img>
             </p>
             <Button label= "TODOS" handleClick={handleTodos}/>
             <Button label= "CERVEZAS" handleClick={handleCerveza} />

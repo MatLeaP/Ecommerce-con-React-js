@@ -1,6 +1,14 @@
 .Item{
     border: 1px black solid;
-    background-color: gold;
+    background-color:blanchedalmond;
     width: 300px;
-    height: 500;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.imgCard{
+    margin: auto;
+    width: 70%;
+    height: 40%;
 }

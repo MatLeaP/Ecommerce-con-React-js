@@ -8,6 +8,7 @@ import "./ItemListContainer.css"
 
 
 
+
 const ItemListContainer = ({title}) => {
     const [products, setProducts] = useState([])
     
@@ -18,15 +19,12 @@ const ItemListContainer = ({title}) => {
         })
     }, [])
 
-
-
-
-
     return(
         <div className="ItemListContainer">
             <h1>{title} </h1>
             <FunctionCounter stock= "10" initial= {1} />
             <ItemList products = {products} />
+           
         </div>
     )
     
