@@ -1,32 +1,29 @@
 import CartWidget from '../CartWidget/CartWidget';
 import './NavBar.css';
-import Button from '../buttons/buttons';
+import { Link, NavLink } from 'react-router-dom';
+
 
 const NavBar = ({title}) =>{
-
-    const handleTodos = () => {
-        console.log('todos')
-    }
-    const handleCerveza = () => {
-        console.log('cerveza')
-    }
-    const handleLicores = () => {
-        console.log('licores')
-    }
-    const handleWhiskys = () => {
-        console.log('whiskys')
-    }
+   
 
     return(
-        <nav>           
-            <p>
+        <nav>
+            <Link to= "/">
+               <p>
                 {title}
-                <img src="./images/barril.png" className='iconNav'></img>
+                <img src="./images/barril.png" alt='imagen' className='iconNav'></img>
             </p>
-            <Button label= "TODOS" handleClick={handleTodos}/>
-            <Button label= "CERVEZAS" handleClick={handleCerveza} />
-            <Button label= "LICORES" handleClick={handleLicores}/>
-            <Button label= "WHISKYS" handleClick={handleWhiskys}/>
+            </Link>           
+         
+            <NavLink to={`/category/cervezas`}>
+                CERVEZAS
+            </NavLink>
+            <NavLink to={`/category/licores`}> 
+                LICORES
+            </NavLink>
+            <NavLink to={`/category/whisky`}>
+                WHISKYS
+            </NavLink>
             <div>
                 <CartWidget />
             </div>

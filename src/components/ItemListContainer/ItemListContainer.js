@@ -1,30 +1,28 @@
-import FunctionCounter from "../ItemCount/ItemCount";
 import { useEffect, useState } from "react"
-import { getProducts } from "../asyncmock";
+import { useParams } from "react-router-dom";
+import { getProductsByCategory} from "../asyncmock";
 import ItemList from "../ItemList/ItemList";
 import "./ItemListContainer.css"
 
 
-
-
-
-
 const ItemListContainer = ({title}) => {
     const [products, setProducts] = useState([])
-    
+    const [loading, setLoading] = useState(true)
+    const {categoryId} = useParams()
+   
+
     useEffect(() => {
-        getProducts().then(products => {
-            console.log(products)
+        getProductsByCategory(categoryId).then(products => {
             setProducts(products)
+            setLoading(false)
         })
-    }, [])
+     
+    }, [categoryId])
 
     return(
         <div className="ItemListContainer">
             <h1>{title} </h1>
-            <FunctionCounter stock= "10" initial= {1} />
-            <ItemList products = {products} />
-           
+            {loading ? <h1>cargando..</h1> : <ItemList products = {products} /> }
         </div>
     )
     
