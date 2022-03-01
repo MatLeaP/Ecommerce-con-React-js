@@ -1,16 +1,16 @@
 import { useState }  from 'react'
 
-const FunctionCounter = ({stock, initial,}) => {
-    const [count, setCount] = useState(initial)
+const FunctionCounter = ({product, onAdd}) => {
+    const [count, setCount] = useState(0)
         
     const decrement = () => {
-        if(count > initial){
+        if(count > 0){
             setCount(count - 1)  
         }
     }
 
     const increment = () => {        
-        if(count < stock){            
+        if(count < product.stock){            
             setCount(count + 1)  
             }else{
                 alert("Maximo de unidades disponibles")
@@ -25,13 +25,12 @@ const FunctionCounter = ({stock, initial,}) => {
     return(
         <>
             <div>
-                <h3>Counter</h3>
                 <h3>{count}</h3>
                 <button onClick={decrement}>-</button>
                 <button onClick={increment}>+</button>
             </div>
             <div>
-                <button onClick={addToCart}>Agregar al carrito</button>
+                <button onClick={()=>onAdd(count)}>Agregar al carrito</button>
             </div>
         </>
     )
