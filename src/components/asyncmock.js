@@ -32,8 +32,7 @@ export const getProductsById = (id) => {
 
 export const getProductsByCategory = (categoryId) => {
     return new Promise((resolve) => {
-        const producstByCategory = products.filter(cat => cat.category == categoryId);
-        console.log(producstByCategory)
+        const producstByCategory = products.filter(cat => cat.category === categoryId);
         setTimeout(()=> {
             categoryId ? resolve(producstByCategory) : resolve(products)
             }, 1000);     
