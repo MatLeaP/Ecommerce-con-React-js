@@ -11,7 +11,7 @@ const NavBar = ({title}) =>{
             <Link to= "/">
                <p>
                 {title}
-                <img src="./images/barril.png" alt='imagen' className='iconNav'></img>
+                <img src="https://st3.depositphotos.com/1526816/13206/v/380/depositphotos_132068224-stock-illustration-wine-bottle-on-wooden-barrels.jpg?forcejpeg=true" alt='imagen' className='iconNav'></img>
             </p>
             </Link>           
          

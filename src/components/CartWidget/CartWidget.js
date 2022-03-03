@@ -7,7 +7,7 @@ const CartWidget = () =>{
         <div>
             <Link to= './cart'>
                 <button>
-                    <img src="../images/cartImage.png" className="cartImg" ></img>
+                    <img src="https://www.seekpng.com/png/detail/901-9012555_tienda-tallas-grandes-blue-shopping-cart-icon-amazon.png" className="cartImg" ></img>
                     0
                 </button>
             </Link>
