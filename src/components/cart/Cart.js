@@ -10,13 +10,17 @@ const Cart = () => {
 
     return(
         <div>
-             {cart.map((prod) =>(
-                 
-                <li key={prod.id}> {prod.quantity}
-                    <button onClick={removeItem} >remover</button>
-                </li>
+             {cart.map((prod) =>{
+                 return(
+                    <div key={prod.id}>
+                        <h3>{prod.name}</h3>
+                        <h3>{prod.quantity} </h3>
+                        <button onClick={() => removeItem(prod.id)} >remover</button>
+                    </div>
+
+                 )
                 
-            ))}
+                 })}
            <button onClick={clearItems}>Reiniciar carrito</button>
         </div>
     )
