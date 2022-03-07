@@ -10,9 +10,10 @@ const ItemListContainer = ({title}) => {
     const [loading, setLoading] = useState(true)
     const {categoryId} = useParams()
    
+    
 
     useEffect(() => {
-        getProductsByCategory(categoryId).then(products => {
+            getProductsByCategory(categoryId).then(products => {
             setProducts(products)
             setLoading(false)
         })

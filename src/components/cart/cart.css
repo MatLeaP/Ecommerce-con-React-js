@@ -1,0 +1,30 @@
+.cart{
+    display: flex;
+    margin-top: 100px;
+    gap:20px;
+
+}
+.itemsCart{
+    display: flex;
+    flex-wrap: nowrap;
+    
+}
+
+.itemsCart img{
+    margin: 10px;
+    width: 50px;
+    height: 70px;
+    border-radius: 150px;
+}
+.item{
+    border: 2px black solid;
+    border-radius: 20px;
+    background-color:gray;
+    width: 250px;
+    height: 300px;
+
+}
+.total{
+
+    width: 200px;
+}

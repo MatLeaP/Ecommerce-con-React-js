@@ -12,3 +12,8 @@
     width: 70%;
     height: 40%;
 }
+.btnDetalle{
+    text-decoration:none;
+    text-transform: uppercase;
+    color: black;
+}

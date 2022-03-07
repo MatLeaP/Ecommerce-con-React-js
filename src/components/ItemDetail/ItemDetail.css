@@ -10,3 +10,11 @@
     width: 70%;
     height: 40%;
 }
+.btnToCart{
+    text-decoration:none;
+    text-transform: uppercase;
+    color: black;
+}
+.itemDetail img{
+    border-radius: 150px;
+}
