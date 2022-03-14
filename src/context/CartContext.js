@@ -59,7 +59,8 @@ console.log(cart)
             clearItems,
             removeItem,
             totalQuantity,
-            totalPrice,           
+            totalPrice,
+                       
         }}>
             {children}
         </Context.Provider>

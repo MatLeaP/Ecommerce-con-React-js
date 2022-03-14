@@ -2,10 +2,19 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import CartContext from '../../context/CartContext'
 import './cart.css'
+import { useNotificationService } from '../../services/notification/NotificationServices'
 
 const Cart = () => {
     const {cart,clearItems,removeItem,totalPrice } = useContext(CartContext)
-    
+
+    const setNotification = useNotificationService()
+
+    const handleRemoveItem = (id, name) =>{
+        removeItem(id)
+        setNotification('sucess', `Se elimino ${name} de la compra`)
+    }
+
+
     if(cart.length){
         return(
             <div className='cart'>
@@ -17,7 +26,7 @@ const Cart = () => {
                                 <h2>{prod.name}</h2>
                                 <h3>Cantidad:{prod.quantity} </h3>
                                 <h4>Subtotal: ${prod.price * prod.quantity} </h4>
-                                <button onClick={() => removeItem(prod.id)} >remover</button>                             
+                                <button onClick={() => handleRemoveItem(prod.id, prod.name)} >remover</button>                             
                             </div>
                         </div>
                     
@@ -41,3 +50,4 @@ const Cart = () => {
 
 
 export default Cart
+
