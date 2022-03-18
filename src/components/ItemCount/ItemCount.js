@@ -1,4 +1,5 @@
 import { useState }  from 'react'
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom'
 
 const FunctionCounter = ({product, onAdd}) => {
     const [count, setCount] = useState(0)
@@ -30,7 +31,7 @@ const FunctionCounter = ({product, onAdd}) => {
                 <button onClick={increment}>+</button>
             </div>
             <div>
-                <button onClick={()=>onAdd(count)}>Agregar al carrito</button>
+                {count > 0 ? <button onClick={()=>onAdd(count)}>Agregar al carrito</button> : null}
             </div>
         </>
     )

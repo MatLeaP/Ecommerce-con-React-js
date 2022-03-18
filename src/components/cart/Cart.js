@@ -103,9 +103,10 @@ if(processingOrder) {
                     <button onClick={clearItems}>Reiniciar carrito</button>
                     <button onClick={() => confirmOrder()} className="Button">Confirmar Compra</button>
                 </div>
-                {
-                (contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== '') &&
-                
+                <div>
+                    {
+                    (contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== '') &&
+                    
                     <div>
                         <h4>Nombre: {contact.name}</h4>
                         <h4>Telefono: {contact.phone}</h4>
@@ -118,22 +119,22 @@ if(processingOrder) {
                         </button>
                     </div>    
             }
-                <Togglable buttonLabelShow={
+                    <Togglable buttonLabelShow={
                         (contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== '') 
                             ? 'Editar contacto' 
                             : 'Agregar contacto'
                         } 
                         ref={contactFormRef}>
-                <ContactForm toggleVisibility={contactFormRef} setContact={setContact} />
-            </Togglable> 
-                
+                    <ContactForm toggleVisibility={contactFormRef} setContact={setContact} />
+                    </Togglable> 
+                </div>    
             </div>
             )
         }
         return(
                 <>
                     <h1>Carrito vacio</h1>
-                    <Link to='/'>Empezar a comprar</Link>
+                    <Link to='/' className='Button'>Empezar a comprar</Link>
                 </>
             )
     }
