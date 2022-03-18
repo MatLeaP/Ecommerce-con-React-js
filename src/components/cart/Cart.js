@@ -1,15 +1,27 @@
-import { useContext } from 'react'
+import { useContext, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import CartContext from '../../context/CartContext'
 import './cart.css'
 import { useNotificationService } from '../../services/notification/NotificationServices'
-import { writeBatch, getDoc, doc, addDoc, collection } from 'firebase/firestore'
+import { writeBatch, getDocs, doc, addDoc, collection, Timestamp, where, query, documentId } from 'firebase/firestore'
 import { firestoreDb } from '../../services/firebase/firebase'
-
+import ContactForm from '../ContactForm/ContactForm'
+import Togglable from '../Togglable/Togglable'
 
 
 
 const Cart = () => {
+    const [processingOrder, setProcessingOrder] = useState(false)
+
+    const [contact, setContact] = useState({
+        name: '',
+        phone: '',
+        address: '',
+        comment: ''
+    })
+
+    const contactFormRef = useRef()
+
     const {cart,clearItems,removeItem,totalPrice } = useContext(CartContext)
 
     const setNotification = useNotificationService()
@@ -20,49 +32,53 @@ const Cart = () => {
     }
 
     const confirmOrder = () =>{
-        //setProcessingOrder(true)
+        if(contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== ''){}
+        setProcessingOrder(true)
 
         const objOrder = {
-            buyer : {
-                name: 'Mat',
-                phone:'1456',
-                adress: 'aca'
-            },
+            buyer : contact,
             items : cart,
             total : totalPrice(),
-            date: new Date()
+            date: Timestamp.fromDate(new Date())
         }
         
         const batch = writeBatch(firestoreDb)
         const outOfStock = []
+        const ids = objOrder.items.map(i => i.id)
 
-        objOrder.items.forEach(prod => {
-            getDoc(doc(firestoreDb, 'products', prod.id)).then(response =>{
-                if(response.data().stock >= prod.quantity){
-                    batch.update(doc(firestoreDb, 'products', response.id), {
-                        stock: response.data().stock - prod.quantity
-                    })
-                }else{
-                    outOfStock.push({id: response.id, ...response.data})
-                }
-            })
-        })
-
-        if(outOfStock.length === 0){
-            addDoc(collection(firestoreDb, 'orders'), objOrder).then(({id}) => {
-                batch.commit().then(()=>{
-                    setNotification('sucess', `La orden dse genero exitosamente, su numero de orden es: ${id}`)
+        getDocs(query(collection(firestoreDb, 'products'),where(documentId(), 'in', ids)))
+            .then(response => {
+                response.docs.forEach((docSnapshot) => {
+                    if(docSnapshot.data().stock >= objOrder.items.find(prod => prod.id === docSnapshot.id).quantity) {
+                        batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - objOrder.items.find(prod => prod.id === docSnapshot.id).quantity})
+                    } else {
+                        outOfStock.push({id: docSnapshot.id, ...docSnapshot.data()})
+                    }
                 })
-            }).catch(error =>{
+            }).then(() => {
+                if(outOfStock.length === 0) {
+                    addDoc(collection(firestoreDb, 'orders'), objOrder).then(({id}) => { 
+                        batch.commit()
+                        clearItems()
+                        setNotification('success', `La orden se genero exitosamente, su numero de orden es: ${id}`)
+                    })
+                } else {
+                    outOfStock.forEach(prod => {
+                        setNotification('error', `El producto ${prod.name} no tiene stock disponible`)
+                        removeItem(prod.id)
+                    })    
+                }               
+            }).catch((error) => {
                 setNotification('error', error)
-            }).finally(()=>{
-
+            }).finally(() => {
+                setProcessingOrder(false)
             })
-        }else{
 
-        }
+    } 
 
-    }
+if(processingOrder) {
+    return <h1>Se esta procesando su orden</h1>
+}
 
 
     if(cart.length){
@@ -87,6 +103,29 @@ const Cart = () => {
                     <button onClick={clearItems}>Reiniciar carrito</button>
                     <button onClick={() => confirmOrder()} className="Button">Confirmar Compra</button>
                 </div>
+                {
+                (contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== '') &&
+                
+                    <div>
+                        <h4>Nombre: {contact.name}</h4>
+                        <h4>Telefono: {contact.phone}</h4>
+                        <h4>Direccion: {contact.address}</h4>
+                        <h4>Comentario: {contact.comment}</h4>
+                        <button onClick={() => setContact({ phone: '', address: '', comment: ''})} 
+                                className='Button' 
+                                style={{backgroundColor: '#db4025'}}>
+                            Borrar datos de contacto
+                        </button>
+                    </div>    
+            }
+                <Togglable buttonLabelShow={
+                        (contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== '') 
+                            ? 'Editar contacto' 
+                            : 'Agregar contacto'
+                        } 
+                        ref={contactFormRef}>
+                <ContactForm toggleVisibility={contactFormRef} setContact={setContact} />
+            </Togglable> 
                 
             </div>
             )
