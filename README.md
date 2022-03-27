@@ -43,5 +43,17 @@ _UseState: para guardar estados.
 _UseEffect: para utilizar en el ciclo de vida de algunos de nuestros componentes.
 Para la organizacion de la app instalamos react-router-dom el cual mediante los LInk nos da la navegabilidad en nuestra app, y NavLink para que al detectar la ruta del Link cambie al estilo que programemos para que se active.
 Se utiliza un Context para que en toda nuestra app este disponible los recurson necesarios.
-Utilizamos el servicio de Firebase para la seguridad, almacenamiento y consulta de nuestros datos(informacion de productos, ordenes de compras, etc).
+Utilizamos el servicio de Firebase para la seguridad, almacenamiento y consulta de nuestros datos(informacion de productos, ordenes de compras, etc). En la coleccion 'categories' se encuetra cada categoria y en el campo 'description' su valor, luego en la coleccion 'products' se encuentran los productos exhibidos con los campos correspondientes a sus caracteristicas. Lo mismo para las ordenes en la coleccion 'orders' con la informacion detallada del comprador y el/los articulos comprados.
 Y como ultimo encriptamos nuestras credenciales en un archivo para mayor seguridad de nuestra app.
+
+## Desarrollador
+El proyecto fue realizado entre los meses de enero y marzo de 2022 por el desarrollador front end Matias Perona.
+
+email de contacto: matiasperona81@gmail.com
+
+## Muestra del proyecto
+Aca les dejo un pequeño recorrido por la aplicacion mostrando la ruta para generar una compra.
+
+link to= 'gif_prueba_barrilito.gif'
+
+
