@@ -32,7 +32,7 @@ const Cart = () => {
     }
 
     const confirmOrder = () =>{
-        if(contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== ''){}
+        if(contact.phone !== '' && contact.address !== '' && contact.comment !== '' && contact.name !== ''){
         setProcessingOrder(true)
 
         const objOrder = {
@@ -74,7 +74,10 @@ const Cart = () => {
                 setProcessingOrder(false)
             })
 
-    } 
+    } else {
+        setNotification('error', 'Debe completar los datos de contacto para generar la orden')
+   }
+}
 
 if(processingOrder) {
     return <h1>Se esta procesando su orden</h1>

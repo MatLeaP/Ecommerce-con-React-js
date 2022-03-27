@@ -6,21 +6,35 @@ export const CartContextProvider = ({children}) =>{
     const [cart, setCart] = useState([])
 
     const addToCart = (product, quantity) =>{
-        if(isInCart(product.id)) {
-            sumarCantidad(product.id, quantity)
-        }else{
-            setCart([...cart, {...product , quantity}]);           
-        }      
+        const productToAdd = {
+            ...product,
+            quantity
+        } 
+
+        isInCart(product.id) ? updateItemInCart(productToAdd) : addItemToCart(productToAdd)    
     }
 
     const isInCart = (id) =>{
-        const validacion =  cart.some((producto) => producto.id === id)
-            return validacion
+        return cart.some((product) => product.id === id)
     }
 
-    const sumarCantidad = (id, quantity) => {
-        const cartArray = cart.map((producto)=> producto.id === id && (producto.quantity += quantity))
-        setCart(cartArray);
+    const updateItemInCart = (id, quantity, productToAdd) => {
+        const updatedCart = cart.map(prod => {
+            if(prod.id === productToAdd.id) {
+                const updatedProduct = {
+                    ...prod,
+                    quantity: prod.quantity + productToAdd.quantity
+                }
+                return updatedProduct
+            } else {
+                return prod
+            }
+        })
+
+        setCart(updatedCart)
+    }
+    const addItemToCart = (productToAdd) => {
+        setCart([...cart, productToAdd])
     }
 
     const clearItems = () =>{
@@ -60,7 +74,7 @@ console.log(cart)
             removeItem,
             totalQuantity,
             totalPrice,
-                       
+            isInCart
         }}>
             {children}
         </Context.Provider>

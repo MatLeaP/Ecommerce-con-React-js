@@ -1,9 +1,10 @@
 import { useState }  from 'react'
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom'
+import {useNotificationService} from '../../services/notification/NotificationServices'
 
 const FunctionCounter = ({product, onAdd}) => {
     const [count, setCount] = useState(0)
-        
+    const setNotification = useNotificationService()
+
     const decrement = () => {
         if(count > 0){
             setCount(count - 1)  
@@ -14,12 +15,8 @@ const FunctionCounter = ({product, onAdd}) => {
         if(count < product.stock){            
             setCount(count + 1)  
             }else{
-                alert("Maximo de unidades disponibles")
+                setNotification('sucess',  `No hay stock disponible`)
         }
-    }
-
-    const addToCart = () => {
-        alert("Eligio " + count + " productos")
     }
 
 

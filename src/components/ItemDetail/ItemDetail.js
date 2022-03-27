@@ -8,12 +8,13 @@ import {useNotificationService} from '../../services/notification/NotificationSe
 const ItemDetail = ({product})=>{
     const [quantity, setQuantity] = useState(0)
 
-    const {addToCart} = useContext(CartContext)
+    const {addToCart,isInCart} = useContext(CartContext)
     const setNotification = useNotificationService()
 
-    const onAdd = (quantity) =>{
+    const onAdd = (quantity,id) =>{
         setQuantity(quantity)
         addToCart(product, quantity)
+        isInCart(id)
         setNotification('sucess',  `Se agrego ${product.name} al carrito`)
 
     };

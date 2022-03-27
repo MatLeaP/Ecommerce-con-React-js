@@ -4,7 +4,6 @@ import ItemList from "../ItemList/ItemList";
 import "./ItemListContainer.css"
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import { firestoreDb } from '../../services/firebase/firebase'
-import { querystring } from "@firebase/util";
 
 const ItemListContainer = ({title}) => {
     const [products, setProducts] = useState([])
@@ -20,7 +19,6 @@ const ItemListContainer = ({title}) => {
                 
             getDocs(collectionRef).then(response =>{
                 const products = response.docs.map(doc =>{
-                    console.log(doc)
                     return{ id: doc.id, ... doc.data()}
                 })
                 console.log(products)
@@ -28,9 +26,6 @@ const ItemListContainer = ({title}) => {
             }).finally(() =>{
                 setLoading(false)
             })
-
-            console.log(products)
-
             return(() =>{
                 setProducts()
             })
