@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BARRILLITO
 ## Proyecto final - Curso REACT JS de Coderhouse
 
@@ -55,5 +56,4 @@ email de contacto: matiasperona81@gmail.com
 Aca les dejo un pequeño recorrido por la aplicacion mostrando la ruta para generar una compra.
 
 link to= 'gif_prueba_barrilito.gif'
-
 
