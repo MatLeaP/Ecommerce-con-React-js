@@ -19,7 +19,7 @@ const ItemListContainer = ({title}) => {
                 
             getDocs(collectionRef).then(response =>{
                 const products = response.docs.map(doc =>{
-                    return{ id: doc.id, ... doc.data()}
+                    return{ id: doc.id, ...doc.data()}
                 })
                 setProducts(products)            
             }).finally(() =>{
